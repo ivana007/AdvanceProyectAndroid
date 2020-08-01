@@ -22,6 +22,7 @@ public class LoguinViewModel extends AndroidViewModel {
     private Context context;
     public LoguinViewModel(@NonNull Application application) {
         super(application);
+        context=application.getApplicationContext();
     }
     public MutableLiveData<String> getCartel() {
         if(cartel==null){

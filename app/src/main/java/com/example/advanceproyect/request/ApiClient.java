@@ -2,6 +2,7 @@ package com.example.advanceproyect.request;
 
 import android.util.Log;
 
+import com.example.advanceproyect.Cliente;
 import com.example.advanceproyect.Usuario;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -41,14 +42,14 @@ public class ApiClient
 
         @POST("clientes/login")
         Call<String> login(@Body Usuario usuario);
-       /* @GET("propietarios")
-        Call<Propietario>buscarpropietario(@Header("Authorization")String token);
+        @GET("clientes")
+        Call<Cliente>buscarCliente(@Header("Authorization")String token);
 
 
-        @PUT("propietarios/{id}")
-        Call<Propietario>actualizar(@Header("Authorization")String token,@Body Propietario propietario);
+        @PUT("clientes/{id}")
+        Call<Cliente>actualizar(@Header("Authorization")String token,@Body Cliente cliente);
 
-        @GET("inmuebles")
+        /*@GET("inmuebles")
         Call<List<Inmueble>>misInmuebles(@Header("Authorization")String token);
 
         @DELETE("inmuebles/{id}")

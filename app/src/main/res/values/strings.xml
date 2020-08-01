@@ -15,4 +15,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="names_array">
+        <item>Funcional</item>
+        <item>Funcional+Indoor</item>
+        <item>Indoor</item>
+        <item>Zumba</item>
+        <item>Musculacion</item>
+        <item>Localizada</item>
+    </string-array>
 </resources>

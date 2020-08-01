@@ -31,17 +31,30 @@
 
     <fragment
         android:id="@+id/perfilFragment"
-        android:name="com.example.advanceproyect.PerfilFragment"
+        android:name="com.example.advanceproyect.ui.perfil.PerfilFragment"
         android:label="fragment_perfil"
         tools:layout="@layout/fragment_perfil" />
     <fragment
         android:id="@+id/turnosFragment"
-        android:name="com.example.advanceproyect.TurnosFragment"
+        android:name="com.example.advanceproyect.ui.turnos.TurnosFragment"
         android:label="fragment_turnos"
-        tools:layout="@layout/fragment_turnos" />
+        tools:layout="@layout/fragment_turnos" >
+        <action
+            android:id="@+id/action_turnosFragment_to_detalleTurnoFragment"
+            app:destination="@id/detalleTurnoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/miCuentaFragment"
-        android:name="com.example.advanceproyect.MiCuentaFragment"
+        android:name="com.example.advanceproyect.ui.micuenta.MiCuentaFragment"
         android:label="fragment_mi_cuenta"
         tools:layout="@layout/fragment_mi_cuenta" />
+    <fragment
+        android:id="@+id/detalleTurnoFragment"
+        android:name="com.example.advanceproyect.DetalleTurnoFragment"
+        android:label="fragment_detalle_turno"
+        tools:layout="@layout/fragment_detalle_turno" >
+        <action
+            android:id="@+id/action_detalleTurnoFragment_to_turnosFragment"
+            app:destination="@id/turnosFragment" />
+    </fragment>
 </navigation>
