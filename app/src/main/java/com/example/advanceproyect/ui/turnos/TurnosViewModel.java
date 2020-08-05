@@ -41,6 +41,7 @@ public class TurnosViewModel extends AndroidViewModel {
         String claveToken=sharedPreferences.getString("token","-1");
         Call<ArrayList<Clase>> clases= ApiClient.getMyApiClient().misClases(claveToken);
         clases.enqueue(new Callback<ArrayList<Clase>>() {
+            
             @Override
             public void onResponse(Call<ArrayList<Clase>> call, Response<ArrayList<Clase>> response) {
                 if(response.isSuccessful()){
