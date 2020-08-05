@@ -3,6 +3,7 @@ package com.example.advanceproyect;
 import java.util.List;
 
 public class ActividadModelo {
+    private int actividadId;
    private int fotoActividad;
    private String nombre;
    private int cupo;
@@ -10,10 +11,19 @@ public class ActividadModelo {
     public ActividadModelo() {
     }
 
-    public ActividadModelo(int fotoActividad, String nombre, int cupo) {
+    public ActividadModelo(int actividadId,int fotoActividad, String nombre, int cupo) {
+        this.actividadId=actividadId;
         this.fotoActividad = fotoActividad;
         this.nombre = nombre;
         this.cupo = cupo;
+    }
+
+    public int getActividadId() {
+        return actividadId;
+    }
+
+    public void setActividadId(int actividadId) {
+        this.actividadId = actividadId;
     }
 
     public int getCupo() {

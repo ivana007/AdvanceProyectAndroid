@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class DetalleTurnoFragment extends Fragment {
-    private TextView tvDia,tvhora,tvnombreClase;
+    private TextView tvDia,tvhora,tvnombreClase,tvfecha;
     private Spinner spDia,spHora;
     private Button btGuardar;
     private DetalleTurnoViewModel vm;
@@ -94,6 +94,14 @@ public class DetalleTurnoFragment extends Fragment {
             public void onChanged(String s) {
                 vm.cargarSpinnerHoras(nbre,s);
                 tvDia.setText(s);
+                //deberia llamar al metodo que calcule fecha
+                vm.cargarFechaSeleccionada(s);
+            }
+        });
+        vm.getFechaMutable().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                tvfecha.setText(s);
             }
         });
     }
@@ -106,9 +114,22 @@ public class DetalleTurnoFragment extends Fragment {
         tvDia=view.findViewById(R.id.tvDiaSeleccionado);
         tvhora=view.findViewById(R.id.tvHoraSeleccionada);
         tvnombreClase=view.findViewById(R.id.tvNombreClaseDetalle);
+        tvfecha=view.findViewById(R.id.tvfechaSeleccionada);
         spDia=view.findViewById(R.id.spinnerDia);
         spHora=view.findViewById(R.id.spinnerHora);
         btGuardar=view.findViewById(R.id.btAceptar);
+        btGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Horario horario=new Horario();
+                horario.setFecha(tvfecha.getText().toString());
+                horario.setHora(tvhora.getText().toString());
+                vm.guardarTurno(horario,nbre);
+
+
+            }
+        });
         tvnombreClase.setText(getArguments().getString("nombreClase").toString());
         nbre=getArguments().getString("nombreClase");
         vm.cargarSpinner(nbre);
@@ -117,6 +138,7 @@ public class DetalleTurnoFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 diaSpinner=parent.getItemAtPosition(position).toString();
                 vm.cambiarDiaSpinner(diaSpinner);
+                //vm.calculaSemana();//probar
             }
 
             @Override

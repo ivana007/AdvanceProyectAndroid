@@ -18,7 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoguinViewModel extends AndroidViewModel {
-    private MutableLiveData<String>cartel;
+    private MutableLiveData<String> cartel;
     private Context context;
     public LoguinViewModel(@NonNull Application application) {
         super(application);
@@ -31,15 +31,14 @@ public class LoguinViewModel extends AndroidViewModel {
         return cartel;
     }
 
+    public void validardatos(@NonNull String mail, String clave) {
 
-    public void validardatos(String email, String pass) {
-
-        if (email.equals("") || pass.equals("")) {
+        if (mail.equals("") || clave.equals("")) {
             cartel.setValue("debe completar todos los datos");
 
         } else {
-            Usuario usuario = new Usuario(email, pass);
-
+            Usuario usuario = new Usuario(mail, clave);
+            Toast.makeText(context, "mi usuario es "+usuario, Toast.LENGTH_LONG).show();
             Call<String> dato = ApiClient.getMyApiClient().login(usuario);
             dato.enqueue(new Callback<String>() {
                 @Override
@@ -66,7 +65,8 @@ public class LoguinViewModel extends AndroidViewModel {
 
                 @Override
                 public void onFailure(Call<String> call, Throwable t) {
-                    Toast.makeText(context, "on failure", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(context, "on failure Error", Toast.LENGTH_LONG).show();
+                    Log.d("error", t.getMessage());
                 }
             });
 

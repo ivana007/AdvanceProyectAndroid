@@ -1,11 +1,11 @@
 package com.example.advanceproyect;
 
 public class Usuario {
-    private String email;
+    private String mail;
     private String clave;
 
     public Usuario(String mail, String clave) {
-        this.email = mail;
+        this.mail = mail;
         this.clave = clave;
     }
 
@@ -13,11 +13,11 @@ public class Usuario {
     }
 
     public String getMail() {
-        return email;
+        return mail;
     }
 
     public void setMail(String mail) {
-        this.email = mail;
+        this.mail = mail;
     }
 
     public String getClave() {

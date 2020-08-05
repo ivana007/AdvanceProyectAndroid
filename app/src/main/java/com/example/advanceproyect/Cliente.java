@@ -6,19 +6,19 @@ public class Cliente {
     private String apellido;
     private String dni;
     private String telefono;
-    private String mail;
+    private String email;
     private String clave;
 
     public Cliente() {
     }
 
-    public Cliente(int clienteId, String nombre, String apellido, String dni, String telefono, String mail, String clave) {
+    public Cliente(int clienteId, String nombre, String apellido, String dni, String telefono, String email, String clave) {
         this.clienteId = clienteId;
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.telefono = telefono;
-        this.mail = mail;
+        this.email = email;
         this.clave = clave;
     }
 
@@ -63,11 +63,11 @@ public class Cliente {
     }
 
     public String getMail() {
-        return mail;
+        return email;
     }
 
     public void setMail(String mail) {
-        this.mail = mail;
+        this.email = email;
     }
 
     public String getClave() {

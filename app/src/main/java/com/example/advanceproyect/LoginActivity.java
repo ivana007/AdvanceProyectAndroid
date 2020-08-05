@@ -34,8 +34,18 @@ private LoguinViewModel lvm;
         tvCartel=findViewById(R.id.tvcartelLogin);
         etEmail.setText("");
         etClave.setText("");
+        btLogin=findViewById(R.id.btLogin);
+        btLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvCartel.setText("");
+                validar(v);
+            }
+        });
     }
     public void validar(View view){
-        lvm.validardatos(etEmail.getText().toString(), etClave.getText().toString());
+        String mail=etEmail.getText().toString();
+        String clave=etClave.getText().toString();
+        lvm.validardatos(mail, clave);
     }
 }

@@ -4,16 +4,26 @@ public class Clase {
     private int claseId;
     private String nombre;
     private double precio;
+    private int cantidadClases;
     private int cupo;
 
     public Clase() {
     }
 
-    public Clase(int claseId, String nombre, double precio, int cupo) {
+    public Clase(int claseId, String nombre, double precio, int cantidadClases, int cupo) {
         this.claseId = claseId;
         this.nombre = nombre;
         this.precio = precio;
+        this.cantidadClases = cantidadClases;
         this.cupo = cupo;
+    }
+
+    public int getCantidadClases() {
+        return cantidadClases;
+    }
+
+    public void setCantidadClases(int cantidadClases) {
+        this.cantidadClases = cantidadClases;
     }
 
     public int getClaseId() {

@@ -79,13 +79,25 @@
         android:id="@+id/tvDiaSeleccionado"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="45dp"
         android:text="DIA SELECCIONADO"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerHora" />
+
+    <TextView
+        android:id="@+id/tvfechaSeleccionada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="FECHA SELECCIONADA"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvDiaSeleccionado" />
 
     <TextView
         android:id="@+id/tvHoraSeleccionada"
@@ -97,7 +109,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDiaSeleccionado" />
+        app:layout_constraintTop_toBottomOf="@+id/tvfechaSeleccionada" />
 
     <Button
         android:id="@+id/btAceptar"

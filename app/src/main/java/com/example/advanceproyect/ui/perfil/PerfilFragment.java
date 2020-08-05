@@ -77,7 +77,12 @@ private PerfilViewModel vm;
         vm.getClienteMutableLivedata().observe(this, new Observer<Cliente>() {
             @Override
             public void onChanged(Cliente cliente) {
-
+                            nombre.setText(cliente.getNombre().toString());
+                            apellido.setText(cliente.getApellido().toString());
+                            dni.setText(cliente.getDni());
+                            telefono.setText(cliente.getTelefono());
+                            email.setText(cliente.getMail().toString());
+                            clienteGuardar=cliente;
             }
         });
         View view= inflater.inflate(R.layout.fragment_perfil, container, false);
