@@ -3,12 +3,22 @@ package com.example.advanceproyect.ui.micuenta;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.advanceproyect.Actividad;
 import com.example.advanceproyect.R;
+import com.example.advanceproyect.ui.turnos.RecyclerViewAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -17,6 +27,10 @@ import com.example.advanceproyect.R;
  * create an instance of this fragment.
  */
 public class MiCuentaFragment extends Fragment {
+    private TextView tvActividad,tvSaldoClases;
+   private MiCuentaViewModel vm;
+    private  RecyclerViewAdapterMisSuscripciones rv;
+    private RecyclerView recyclerView;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -55,12 +69,27 @@ public class MiCuentaFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mi_cuenta, container, false);
+        View view= inflater.inflate(R.layout.fragment_mi_cuenta, container, false);
+        recyclerView=view.findViewById(R.id.recyclerActividades);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(MiCuentaViewModel.class);
+        vm.getActividadesMutableLiveData().observe(this, new Observer<List<Actividad>>() {
+            @Override
+            public void onChanged(List<Actividad> actividads) {
+                rv=new RecyclerViewAdapterMisSuscripciones(actividads,getContext());
+                recyclerView.setAdapter(rv);
+            }
+        });
+        vm.cargarDatos();
+        return view;
     }
 }

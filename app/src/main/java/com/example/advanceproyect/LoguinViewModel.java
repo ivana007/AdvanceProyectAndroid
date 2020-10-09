@@ -37,9 +37,9 @@ public class LoguinViewModel extends AndroidViewModel {
             cartel.setValue("debe completar todos los datos");
 
         } else {
-            Usuario usuario = new Usuario(mail, clave);
-            Toast.makeText(context, "mi usuario es "+usuario, Toast.LENGTH_LONG).show();
-            Call<String> dato = ApiClient.getMyApiClient().login(usuario);
+            UsuarioLoguin usuarioLoguin = new UsuarioLoguin(mail, clave);
+            /*Toast.makeText(context, "mi usuario es "+usuario, Toast.LENGTH_LONG).show();*/
+            Call<String> dato = ApiClient.getMyApiClient().login(usuarioLoguin);
             dato.enqueue(new Callback<String>() {
                 @Override
                 public void onResponse(Call<String> call, Response<String> response) {
@@ -58,8 +58,6 @@ public class LoguinViewModel extends AndroidViewModel {
 
                         cartel.postValue("Email o contraseña incorrectos");
                         Toast.makeText(context, response.errorBody().toString(), Toast.LENGTH_LONG).show();
-
-
                     }
                 }
 
@@ -71,9 +69,6 @@ public class LoguinViewModel extends AndroidViewModel {
             });
 
 
-        }/*else {
-                cartel.setValue("Email o contraseña incorrectos");
-
-        }*/
+        }
     }
 }

@@ -5,20 +5,25 @@ import java.util.Date;
 
 public class Horario {
     private int horarioId;
-    private String fecha;
+    private String dia;
     private String hora;
-    private int ClienteId;
-    private int ClaseId;
+    private String estado;
+    private int claseId;
+    private int actividadId;
+   private Actividad actividad;
+
 
     public Horario() {
     }
 
-    public Horario(int horarioId, String fecha, String hora, int clienteId, int claseId) {
+    public Horario(int horarioId, String dia, String hora, String estado, int claseId, int actividadId, Actividad actividad) {
         this.horarioId = horarioId;
-        this.fecha = fecha;
+        this.dia = dia;
         this.hora = hora;
-        ClienteId = clienteId;
-        ClaseId = claseId;
+        this.estado = estado;
+        this.claseId = claseId;
+        this.actividadId = actividadId;
+        this.actividad = actividad;
     }
 
     public int getHorarioId() {
@@ -29,12 +34,12 @@ public class Horario {
         this.horarioId = horarioId;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getDia() {
+        return dia;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setDia(String dia) {
+        this.dia = dia;
     }
 
     public String getHora() {
@@ -45,19 +50,35 @@ public class Horario {
         this.hora = hora;
     }
 
-    public int getClienteId() {
-        return ClienteId;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setClienteId(int clienteId) {
-        ClienteId = clienteId;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public int getClaseId() {
-        return ClaseId;
+        return claseId;
     }
 
     public void setClaseId(int claseId) {
-        ClaseId = claseId;
+        this.claseId = claseId;
+    }
+
+    public int getActividadId() {
+        return actividadId;
+    }
+
+    public void setActividadId(int actividadId) {
+        this.actividadId = actividadId;
+    }
+
+    public Actividad getActividad() {
+        return actividad;
+    }
+
+    public void setActividad(Actividad actividad) {
+        this.actividad = actividad;
     }
 }

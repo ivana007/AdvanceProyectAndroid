@@ -10,11 +10,14 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.advanceproyect.Clase;
-import com.example.advanceproyect.Cliente;
+
 import com.example.advanceproyect.Horario;
+import com.example.advanceproyect.HorarioAux;
 import com.example.advanceproyect.R;
 import com.example.advanceproyect.Dia;
+import com.example.advanceproyect.Turno;
+import com.example.advanceproyect.TurnoAux;
+import com.example.advanceproyect.Usuario;
 import com.example.advanceproyect.request.ApiClient;
 
 import java.util.ArrayList;
@@ -32,9 +35,17 @@ public class DetalleTurnoViewModel extends AndroidViewModel {
     private MutableLiveData<String>spinnerDiaMutable;
     private MutableLiveData<String>fechaMutable;
 
+    private MutableLiveData<Horario>horarioMutable;
+
     public DetalleTurnoViewModel(@NonNull Application application) {
         super(application);
         context=application.getApplicationContext();
+    }
+    public LiveData<Horario>getHorarioMutable(){
+        if(horarioMutable==null){
+            horarioMutable=new MutableLiveData<>();
+        }
+        return horarioMutable;
     }
     public LiveData<ArrayList<String>>getListaDias(){
         if(listaDias==null){
@@ -320,10 +331,10 @@ public class DetalleTurnoViewModel extends AndroidViewModel {
         if(diasemana.equals("4")){
             if(diaSeleccionado.equals("Lunes")){
                 //dia=c.get(Calendar.DATE)-1;
-                fechaMutable.setValue("LOS TURNOS SE ACTUALIZAN FINALIZADA LA SEMANA");
+                fechaMutable.setValue("No hay turnos");
             }
             if(diaSeleccionado.equals("Martes")){
-                fechaMutable.setValue("LOS TURNOS SE ACTUALIZAN FINALIZADA LA SEMANA");
+                fechaMutable.setValue("No hay turnos");
             }
             if(diaSeleccionado.equals("Miercoles")){
                 dia=c.get(Calendar.DATE);
@@ -350,13 +361,13 @@ public class DetalleTurnoViewModel extends AndroidViewModel {
         if(diasemana.equals("5")){
             if(diaSeleccionado.equals("Lunes")){
                 //dia=c.get(Calendar.DATE)-1;
-                fechaMutable.setValue("LOS TURNOS SE ACTUALIZAN FINALIZADA LA SEMANA");
+                fechaMutable.setValue("No hay turnos");
             }
             if(diaSeleccionado.equals("Martes")){
-                fechaMutable.setValue("LOS TURNOS SE ACTUALIZAN FINALIZADA LA SEMANA");
+                fechaMutable.setValue("No hay turnos");
             }
             if(diaSeleccionado.equals("Miercoles")){
-                fechaMutable.setValue("LOS TURNOS SE ACTUALIZAN FINALIZADA LA SEMANA");
+                fechaMutable.setValue("No hay turnos");
             }
             if(diaSeleccionado.equals("Jueves")){
                 dia=c.get(Calendar.DATE);
@@ -376,16 +387,16 @@ public class DetalleTurnoViewModel extends AndroidViewModel {
         if(diasemana.equals("6")){
             if(diaSeleccionado.equals("Lunes")){
                 //dia=c.get(Calendar.DATE)-1;
-                fechaMutable.setValue("LOS TURNOS SE ACTUALIZAN FINALIZADA LA SEMANA");
+                fechaMutable.setValue("No hay turnos");
             }
             if(diaSeleccionado.equals("Martes")){
-                fechaMutable.setValue("LOS TURNOS SE ACTUALIZAN FINALIZADA LA SEMANA");
+                fechaMutable.setValue("No hay turnos");
             }
             if(diaSeleccionado.equals("Miercoles")){
-                fechaMutable.setValue("LOS TURNOS SE ACTUALIZAN FINALIZADA LA SEMANA");
+                fechaMutable.setValue("No hay turnos");
             }
             if(diaSeleccionado.equals("Jueves")){
-                fechaMutable.setValue("LOS TURNOS SE ACTUALIZAN FINALIZADA LA SEMANA");
+                fechaMutable.setValue("No hay turnos");
             }
             if(diaSeleccionado.equals("Viernes")){
                 dia=c.get(Calendar.DATE);
@@ -396,29 +407,33 @@ public class DetalleTurnoViewModel extends AndroidViewModel {
             }
         }//viernes
     }
-    public void guardarTurno(final Horario horario, String nombreClase){
+    public void armarHorario(final HorarioAux horarioAux){
         SharedPreferences sharedPreferences=context.getSharedPreferences("token",0);
         String claveToken=sharedPreferences.getString("token","-1");
-        //buscar la clase y el cliente
-        Call<Cliente> cliente= ApiClient.getMyApiClient().buscarCliente(claveToken);
-        cliente.enqueue(new Callback<Cliente>() {
+        //buscar id horario
+        Call<Horario> horarioCall= ApiClient.getMyApiClient().BuscarHorario(claveToken,horarioAux);
+        horarioCall.enqueue(new Callback<Horario>() {
             @Override
-            public void onResponse(Call<Cliente> call, Response<Cliente> response) {
-                if(response.isSuccessful()){
-                    Cliente cliente1=response.body();
-                    horario.setClienteId(cliente1.getClienteId());
-                }else{
-                    Toast.makeText(context,"estoy en el else",Toast.LENGTH_LONG).show();
+            public void onResponse(Call<Horario> call, Response<Horario> response) {
+                if (response.isSuccessful())
+                {
+                    Horario horarioEncontrado=response.body();
+                    horarioMutable.setValue(horarioEncontrado);
                 }
             }
 
             @Override
-            public void onFailure(Call<Cliente> call, Throwable t) {
+            public void onFailure(Call<Horario> call, Throwable t) {
 
             }
         });
 
-
-        Call<Horario> inmu= ApiClient.getMyApiClient().CrearHorario(claveToken,horario);
+    }
+    public void sacarTurno(int id)
+    {
+        SharedPreferences sharedPreferences=context.getSharedPreferences("token",0);
+        String claveToken=sharedPreferences.getString("token","-1");
+        //crear el turno
+        Call<Turno> turnoCall= ApiClient.getMyApiClient().CrearTurno(claveToken,id);
     }
 }

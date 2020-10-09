@@ -104,6 +104,14 @@ public class DetalleTurnoFragment extends Fragment {
                 tvfecha.setText(s);
             }
         });
+        vm.getHorarioMutable().observe(this, new Observer<Horario>() {
+            @Override
+            public void onChanged(Horario horario) {
+                int id=horario.getHorarioId();
+               ;
+                vm.sacarTurno(id);
+            }
+        });
     }
 
     @Override
@@ -122,12 +130,11 @@ public class DetalleTurnoFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Horario horario=new Horario();
-                horario.setFecha(tvfecha.getText().toString());
-                horario.setHora(tvhora.getText().toString());
-                vm.guardarTurno(horario,nbre);
-
-
+                HorarioAux horarioAux=new HorarioAux();
+                horarioAux.setDia(tvfecha.getText().toString());
+                horarioAux.setHora(tvhora.getText().toString());
+                horarioAux.setActividadId(getArguments().getInt("actividadId"));
+                vm.armarHorario(horarioAux);
             }
         });
         tvnombreClase.setText(getArguments().getString("nombreClase").toString());

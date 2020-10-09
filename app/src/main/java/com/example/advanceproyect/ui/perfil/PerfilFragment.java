@@ -2,21 +2,36 @@ package com.example.advanceproyect.ui.perfil;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
-import com.example.advanceproyect.Cliente;
+
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.example.advanceproyect.MainActivity;
 import com.example.advanceproyect.R;
+import com.example.advanceproyect.Usuario;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 
 /**
@@ -26,9 +41,11 @@ import com.example.advanceproyect.R;
  */
 public class PerfilFragment extends Fragment {
 private EditText nombre,apellido,dni,telefono,email;
+private ImageView fotoPerfil;
 private Button editarperfil;
-private Cliente clienteGuardar=null;
+private Usuario clienteGuardar=null;
 private PerfilViewModel vm;
+private Bitmap bitmapFoto=null;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -74,18 +91,36 @@ private PerfilViewModel vm;
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PerfilViewModel.class);
-        vm.getClienteMutableLivedata().observe(this, new Observer<Cliente>() {
+        vm.getClienteMutableLivedata().observe(this, new Observer<Usuario>() {
             @Override
-            public void onChanged(Cliente cliente) {
-                            nombre.setText(cliente.getNombre().toString());
-                            apellido.setText(cliente.getApellido().toString());
-                            dni.setText(cliente.getDni());
-                            telefono.setText(cliente.getTelefono());
-                            email.setText(cliente.getMail().toString());
-                            clienteGuardar=cliente;
+            public void onChanged(Usuario usuario) {
+
+                    if(usuario.getFotoUsuario().equals(MainActivity.PATHNOFOTO))
+                    {
+                        Glide.with(getContext())
+                                .load(MainActivity.PATHNOFOTO)
+                                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                                .into(fotoPerfil);
+                    }else
+                        {
+                            Glide.with(getContext())
+                                    .load(MainActivity.PATH +usuario.getFotoUsuario())
+                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .into(fotoPerfil);
+                        }
+
+
+                            nombre.setText(usuario.getNombre().toString());
+                            apellido.setText(usuario.getApellido().toString());
+                            dni.setText(usuario.getDni());
+                            telefono.setText(usuario.getTelefono());
+                            email.setText(usuario.getEmail());
+                            clienteGuardar=usuario;
             }
         });
+
         View view= inflater.inflate(R.layout.fragment_perfil, container, false);
+        fotoPerfil=view.findViewById(R.id.imagenPerfil);
         nombre=view.findViewById(R.id.etNombrePerfil);
         apellido=view.findViewById(R.id.etApellidoPerfil);
         dni=view.findViewById(R.id.etDniPerfil);
@@ -124,13 +159,16 @@ private PerfilViewModel vm;
         vm.cargarDatos();
         return view;
     }
+
+
     public void aceptar(){
 
         clienteGuardar.setDni(dni.getText().toString());
         clienteGuardar.setApellido(apellido.getText().toString());
         clienteGuardar.setNombre(nombre.getText().toString());
         clienteGuardar.setTelefono(telefono.getText().toString());
-        clienteGuardar.setMail(email.getText().toString());
+        clienteGuardar.setEmail(email.getText().toString());
+        //clienteGuardar.setFotoUsuario(encodeImage(bitmapFoto));
         //propietarioGuardar.setPassword(pass.getText().toString());
         vm.actualizar(clienteGuardar);
     }

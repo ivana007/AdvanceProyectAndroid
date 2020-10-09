@@ -16,8 +16,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.example.advanceproyect.Actividad;
 import com.example.advanceproyect.ActividadModelo;
-import com.example.advanceproyect.Clase;
+
 import com.example.advanceproyect.Hora;
 import com.example.advanceproyect.R;
 
@@ -87,16 +88,17 @@ public class TurnosFragment extends Fragment {
         recyclerView=view.findViewById(R.id.myRecycler);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));//damos forma a la lista
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(TurnosViewModel.class);
-        vm.getListaActividad().observe(this, new Observer<ArrayList<ActividadModelo>>() {
+        vm.getListaActividad().observe(this, new Observer<List<Actividad>>() {
             @Override
-            public void onChanged(final ArrayList<ActividadModelo> actividadModelos) {
-                RecyclerViewAdapter recyclerViewAdapter=new RecyclerViewAdapter(actividadModelos,getContext());
+            public void onChanged(final List<Actividad> actividad) {
+                RecyclerViewAdapter recyclerViewAdapter=new RecyclerViewAdapter(actividad,getContext());
                 recyclerViewAdapter.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ActividadModelo actividadModelo=actividadModelos.get(recyclerView.getChildAdapterPosition(v));
+                        Actividad actividad1=actividad.get(recyclerView.getChildAdapterPosition(v));
                         Bundle bundle=new Bundle();
-                        bundle.putString("nombreClase",actividadModelo.getNombre());
+                        bundle.putString("nombreClase",actividad1.getNombre());
+                        bundle.putInt("actividadId",actividad1.getActividadId());
                         Navigation.findNavController(v).navigate(R.id.detalleTurnoFragment,bundle);
                     }
                 });

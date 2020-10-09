@@ -17,9 +17,13 @@ import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.advanceproyect.Actividad;
 import com.example.advanceproyect.ActividadModelo;
-import com.example.advanceproyect.Clase;
+
 import com.example.advanceproyect.Hora;
+import com.example.advanceproyect.MainActivity;
 import com.example.advanceproyect.R;
 
 import java.util.ArrayList;
@@ -28,8 +32,8 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> implements View.OnClickListener{
     private Context context;
     private View.OnClickListener listener;
-    private ArrayList<ActividadModelo> lista;
-
+    private List<Actividad> lista;
+    private static final String PATH="http://192.168.101.233:45455";
     //private ArrayList<Hora>listaHoras;
     @NonNull
     @Override
@@ -43,7 +47,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.nombre.setText(lista.get(position).getNombre());
-        holder.foto.setImageResource(lista.get(position).getFotoActividad());
+        //holder.foto.setImageResource(lista.get(position).getImagen());
+        Glide.with(context)
+                .load(PATH +  lista.get(position).getImagen())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.foto);
         holder.cupo.setText(lista.get(position).getCupo()+"");
     }
 
@@ -77,7 +85,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
 
-    public RecyclerViewAdapter(ArrayList<ActividadModelo> lista, Context context) {
+    public RecyclerViewAdapter(List<Actividad> lista, Context context) {
         this.lista = lista;
         this.context = context;
 
