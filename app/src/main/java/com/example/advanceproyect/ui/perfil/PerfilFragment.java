@@ -2,17 +2,14 @@ package com.example.advanceproyect.ui.perfil;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
-import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,16 +19,8 @@ import android.widget.ImageView;
 
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.example.advanceproyect.MainActivity;
 import com.example.advanceproyect.R;
-import com.example.advanceproyect.Usuario;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-
-import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 
 /**
@@ -90,26 +79,14 @@ private Bitmap bitmapFoto=null;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        final View view= inflater.inflate(R.layout.fragment_perfil, container, false);
         vm= ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(PerfilViewModel.class);
         vm.getClienteMutableLivedata().observe(this, new Observer<Usuario>() {
             @Override
             public void onChanged(Usuario usuario) {
-
-                    if(usuario.getFotoUsuario().equals(MainActivity.PATHNOFOTO))
-                    {
-                        Glide.with(getContext())
-                                .load(MainActivity.PATHNOFOTO)
-                                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
-                                .into(fotoPerfil);
-                    }else
-                        {
                             Glide.with(getContext())
-                                    .load(MainActivity.PATH +usuario.getFotoUsuario())
-                                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                    .load(MainActivity.PATH+usuario.getFotoUsuario())
                                     .into(fotoPerfil);
-                        }
-
-
                             nombre.setText(usuario.getNombre().toString());
                             apellido.setText(usuario.getApellido().toString());
                             dni.setText(usuario.getDni());
@@ -119,7 +96,7 @@ private Bitmap bitmapFoto=null;
             }
         });
 
-        View view= inflater.inflate(R.layout.fragment_perfil, container, false);
+
         fotoPerfil=view.findViewById(R.id.imagenPerfil);
         nombre=view.findViewById(R.id.etNombrePerfil);
         apellido=view.findViewById(R.id.etApellidoPerfil);
@@ -157,6 +134,7 @@ private Bitmap bitmapFoto=null;
             }
         });
         vm.cargarDatos();
+
         return view;
     }
 
@@ -168,7 +146,6 @@ private Bitmap bitmapFoto=null;
         clienteGuardar.setNombre(nombre.getText().toString());
         clienteGuardar.setTelefono(telefono.getText().toString());
         clienteGuardar.setEmail(email.getText().toString());
-        //clienteGuardar.setFotoUsuario(encodeImage(bitmapFoto));
         //propietarioGuardar.setPassword(pass.getText().toString());
         vm.actualizar(clienteGuardar);
     }

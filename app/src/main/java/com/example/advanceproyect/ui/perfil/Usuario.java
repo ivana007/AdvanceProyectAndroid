@@ -1,4 +1,4 @@
-package com.example.advanceproyect;
+package com.example.advanceproyect.ui.perfil;
 
 public class Usuario {
 

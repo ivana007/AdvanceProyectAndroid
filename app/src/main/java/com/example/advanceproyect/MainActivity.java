@@ -19,8 +19,8 @@ import androidx.appcompat.widget.Toolbar;
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    public static String PATH="http://192.168.0.105:45455";
-    public static String PATHNOFOTO="http://localhost:58679//fotoPerfil/noimagen.png";
+    public static String PATH="http://192.168.101.233:45455";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

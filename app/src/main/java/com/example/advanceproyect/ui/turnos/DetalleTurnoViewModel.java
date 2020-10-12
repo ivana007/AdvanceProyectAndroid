@@ -16,7 +16,7 @@ import com.example.advanceproyect.HorarioAux;
 import com.example.advanceproyect.R;
 import com.example.advanceproyect.Dia;
 import com.example.advanceproyect.Turno;
-import com.example.advanceproyect.TurnoAux;
+
 import com.example.advanceproyect.Usuario;
 import com.example.advanceproyect.request.ApiClient;
 

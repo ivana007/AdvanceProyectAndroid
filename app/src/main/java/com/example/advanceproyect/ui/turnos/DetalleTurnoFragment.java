@@ -1,4 +1,4 @@
-package com.example.advanceproyect;
+package com.example.advanceproyect.ui.turnos;
 
 import android.os.Bundle;
 
@@ -15,7 +15,9 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.advanceproyect.ui.turnos.DetalleTurnoViewModel;
+import com.example.advanceproyect.Horario;
+import com.example.advanceproyect.HorarioAux;
+import com.example.advanceproyect.R;
 
 import java.util.ArrayList;
 
@@ -74,7 +76,7 @@ public class DetalleTurnoFragment extends Fragment {
         vm.getListaDias().observe(this, new Observer<ArrayList<String>>() {
             @Override
             public void onChanged(ArrayList<String> dias) {
-                ArrayAdapter<String>adapterDia=new ArrayAdapter<String>(getContext(),R.layout.support_simple_spinner_dropdown_item,dias);
+                ArrayAdapter<String>adapterDia=new ArrayAdapter<String>(getContext(), R.layout.support_simple_spinner_dropdown_item,dias);
                 spDia.setAdapter(adapterDia);
                 //diaSpinner=spDia.getSelectedItem().toString();
                // vm.cambiarDiaSpinner(diaSpinner);

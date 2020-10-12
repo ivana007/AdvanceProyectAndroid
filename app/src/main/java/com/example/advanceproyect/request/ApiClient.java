@@ -7,12 +7,11 @@ import com.example.advanceproyect.Horario;
 import com.example.advanceproyect.HorarioAux;
 import com.example.advanceproyect.Turno;
 
-import com.example.advanceproyect.Usuario;
+import com.example.advanceproyect.ui.perfil.Usuario;
 import com.example.advanceproyect.UsuarioLoguin;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
