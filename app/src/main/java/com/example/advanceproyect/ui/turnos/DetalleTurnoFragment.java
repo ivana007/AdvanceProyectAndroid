@@ -33,6 +33,7 @@ public class DetalleTurnoFragment extends Fragment {
     private Button btGuardar;
     private DetalleTurnoViewModel vm;
     private String diaSpinner,nbre;
+    private int id;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -141,6 +142,7 @@ public class DetalleTurnoFragment extends Fragment {
         });
         tvnombreClase.setText(getArguments().getString("nombreClase").toString());
         nbre=getArguments().getString("nombreClase");
+        id=getArguments().getInt("actividadId");
         vm.cargarSpinner(nbre);
         spDia.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

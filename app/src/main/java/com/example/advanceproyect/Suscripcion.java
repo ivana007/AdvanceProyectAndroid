@@ -1,5 +1,7 @@
 package com.example.advanceproyect;
 
+import com.example.advanceproyect.ui.perfil.Usuario;
+
 import java.util.Date;
 
 public class Suscripcion {

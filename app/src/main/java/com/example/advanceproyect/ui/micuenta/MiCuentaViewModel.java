@@ -11,7 +11,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.advanceproyect.Actividad;
-import com.example.advanceproyect.Usuario;
+
 import com.example.advanceproyect.request.ApiClient;
 
 import java.util.ArrayList;

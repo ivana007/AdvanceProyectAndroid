@@ -12,6 +12,7 @@ import com.example.advanceproyect.UsuarioLoguin;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -55,9 +56,11 @@ public class ApiClient
         Call<Actividad>buscarclase(@Header("Authorization")String token,@Path("id") int  ActividadId);
         @POST("horarios")
         Call<Horario>BuscarHorario(@Header("Authorization")String token, @Body HorarioAux horarioAux);
-
+        @GET("horarios/getDias/{id}")
+        Call<ArrayList<String>>CargarListaDias(@Header("Authorization")String token, @Path("id") int  ActividadId);
         @GET("actividades")
         Call<List<Actividad>>MisActividades(@Header("Authorization")String token);
+
         @POST("Turnos")
         Call<Turno>CrearTurno(@Header("Authorization")String token, @Body int id);
 

@@ -17,13 +17,14 @@ import com.example.advanceproyect.R;
 import com.example.advanceproyect.Dia;
 import com.example.advanceproyect.Turno;
 
-import com.example.advanceproyect.Usuario;
+
 import com.example.advanceproyect.request.ApiClient;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,6 +79,7 @@ public class DetalleTurnoViewModel extends AndroidViewModel {
 
 
     public void cargarSpinner(String nombre){
+
         if(nombre.equals("Funcional")||nombre.equals("Funcional+Indoor")){
             ArrayList<String>listaD=new ArrayList<>();
             //ArrayList<String>semana=calculaSemana();
